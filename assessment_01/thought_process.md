@@ -20,7 +20,7 @@ We found the statistical values of all the columns as follows
 
 We started by finding the column corresponding to volume. This is because volume is expected to be an integer because it represents the number of shares traded that day which is a discrete value and it would have much different statistical values (mean, median, min, max, range and standard deviation) than the other columns.
 
-Examining Table (1?), we observe the highly different values of all the statistical measures which significantly makes us determine that the column `neutronCount` corresponds to volume.
+Examining the Statical Table above, we observe the highly different values of all the statistical measures which significantly makes us determine that the column `neutronCount` corresponds to volume.
 
 ## Finding High and Low (bounds for a time unit)
 
@@ -42,11 +42,11 @@ Frequency of each column being the ROW-WISE MINIMUM:
 
 (others 0)
 
-From Table (2?), we infer that after keeping aside the column for volume (`neutronCount`) the values in the column `gamma` are the maximum for `<how many>` values which is the highest and thus we can very confidently suggest that `gamma` is indeed the maximum and maps to the actual column `high`.
+From the above tables, we infered that after keeping the column for volume (`neutronCount`) aside the values in the column `gamma` are the maximum for `432559` values which is the highest and thus we can very confidently suggest that `gamma` is indeed the maximum and maps to the actual column `high`.
 
-Similarly, we consolidated the results for all the times each column is the minimum of all the columns for all values as shown in Table (3?) and found that the column `omega` is lowest for most times `<how much>` and thus maps to the actual column `low`.
+Similarly, we consolidated the results for all the times each column is the minimum of all the columns for all values as shown in Table above and found that the column `omega` is lowest for most times `432906` and thus maps to the actual column `low`.
 
-<\Add Candlestick Analysis>
+Also as we later found, if we kept gamma and omega as high and low during the candlestick analysis after finding open and close, they always contained open and close.
 
 ## Finding Price
 
@@ -62,8 +62,6 @@ $$low <= open <= high$$
 $$low <= close <= high$$
 
 This means that price may be the predicted price or some other suitable such quantity. However it can be said with much confidence that `pulse` is not `open / close`. Hence, pulse needs to be `price`.
-
-(make a chart to determine how the price)
 
 ## Finding Open and Close
 
@@ -96,8 +94,13 @@ Here we thought of using candlestick diagrams
 ### Analysing another segment
 <img src="images/hyp_2_part_2.png" width=700>
 
+## We also employed to more methods to further check if the results obtained with the candlestick analysis are correct
 
-######### Add analysis about why this and why not this later
+These were
+1. A Clever Regression model technique
+2. A self-designed custom Sliding Window Dynamic Programming Algorithm
+
+We have discussed these two methods in detail in the `analysis.ipynb` file.
 
 ### Challenges (and how we overcame them)
 1. It was challenging to find an accurate way to map deltaX and flux to open and close. We overcame this by employing many methods:
@@ -193,6 +196,6 @@ P(A) = P(gamma is high ∧ omega is low)
 * Same as `deltaX` above
 
 
+# Summary
 
-
-
+Overall, we combined several methods including statical inference, visualisation, data analytics, and advanced algorithms like momentum regression and sliding window dynamic programming to derive the mapping. 
