@@ -14,6 +14,8 @@ source venv/bin/activate # on Linux
 
 pip install -r requirements.txt
 ```
+### `timeline_visualization.ipynb`
+* Simply run the python notebook
 ### `deduplication.py`
 * Run the script along with the following command line arguments
     1. Input csv file
