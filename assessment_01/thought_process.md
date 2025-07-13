@@ -106,20 +106,93 @@ Here we thought of using candlestick diagrams
    3. Candle Stick Analysis
 
 
-### Confidence 
-<columnwise confidence analysis based on some statistics of your choice>
-
-1. Low
-2. High
-3. Volume
-4. price = P(1 | low = conf1 && high = conf2)
-5. open -> slope + thresholding / regression model
-5. close -> slope + thresholding / regression model
-
-### Summary
-Overall, I combined ...................................................... to derive the mapping. I also wrote a ........................... 
 
 
+# Confidence 
+### **1. `neutronCount` → `volume`**
+
+- `neutronCount` is always an integer and consistently has large magnitudes compared to other columns.
+- `volume` is typically count-based integer and has much larger scale than price columns.
+- **No violations or ambiguity observed.**
+
+**Confidence: 1.0**
+![Alt Text](./images/1.png)
+
+---
+
+### **2. `gamma` → `high`**
+
+- The `high` price must be the maximum value in each row.
+- In 500,000 rows `gamma` is not the maximum in **67,441 rows**, meaning it satisfies the constraint in:
+
+```
+Correct rows = 500,000 - 67,441 = 432,559
+Confidence = 432,559 / 500,000 = 0.8651
+```
+
+**Confidence: 0.8651**
+![Alt Text](./images/2.png)
+
+---
+
+### **3. `omega` → `low`**
+
+- The `low` price must be the **minimum value in each row**.
+- `omega` is not the minimum** in **67,094 rows**, meaning it satisfies the constraint in:
+
+```
+Correct rows = 500,000 - 67,094 = 432,906
+Confidence = 432,906 / 500,000 = 0.8658
+```
+
+**Confidence: 0.8658**
+![Alt Text](./images/3.png)
+
+---
+
+### **4. `pulse` → `price`**
+
+- **Let A**: Event that `omega` is `low` and `gamma` is `high`.
+- **Let B**: Event that `pulse` is `price`.
 
 
-WRITE ALL ASSUMPTIONS CLEARLY
+- **If B is true** (pulse is price), then it must always lie between low and high:
+  - That means `omega = low` and `gamma = high` must be true ⇒ **A is necessarily true**.
+  ```
+  P(A | B) = 1
+  ```
+
+- **If A is true** (omega is low and gamma is high), then only `pulse` lies outside `[low, high]` range:
+  - So, `pulse` **cannot** be `open` or `close`, which must lie within the range.
+  - So it must be `price`.
+  ```
+  P(B | A) = 1
+  ```
+
+By **Bayes' Rule**:
+
+```
+P(B) = P(A)
+```
+
+Where:
+
+```
+P(A) = P(gamma is high ∧ omega is low)
+     = actual observed count / total rows
+     = 365,465 / 500,000 = 0.7309
+```
+
+**Confidence: 0.7309**
+![Alt Text](./images/4.png)
+
+### **5. `deltaX` → `open`**
+* We get the confidence interval of `deltaX` using the results of the regression and the sliding window model, as explained in the `analysis.ipynb` file
+
+### **6. `flux` → `close`**
+* Same as `deltaX` above
+
+
+
+
+
