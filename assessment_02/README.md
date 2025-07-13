@@ -1,8 +1,9 @@
 # Files in this directory
-1. `duplication_analysis.csv`: CSV containing analysis of the duplicate values
-2. `dup_script.ipynb`: Script used to generate the above
-3. `deduplicate.py`: Script to generate the deduplicated CSV file
-4. `future_improvements.md`: Points about how to prevent race conditions
+1. `timeline_visualization.ipynb`: Script to visualize the timeline of workers
+2. `duplication_analysis.csv`: CSV containing analysis of the duplicate values
+3. `dup_script.ipynb`: Script used to generate the above
+4. `deduplicate.py`: Script to generate the deduplicated CSV file
+5. `future_improvements.md`: Points about how to prevent race conditions
 
 # Running the scripts
 * Copy the data files `03_worker_logs.csv` and `04_final_output.csv` into this directory
