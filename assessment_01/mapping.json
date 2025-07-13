@@ -17,7 +17,7 @@
     },
     "pulse" : {
         "mapping" : "price",
-        "confidnce": 0.749
+        "confidnce": 0.73
     },
     "neutronCount" : {
         "mapping" : "volume",
